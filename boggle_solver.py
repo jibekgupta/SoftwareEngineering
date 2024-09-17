@@ -10,8 +10,17 @@ class Boggle:
     self.grid = grid
     self.dictionary = set(dictionary) # Store the dictionary as a set for fast lookup
     self.rows = len(grid)     # Number of rows in the grid
-    self.cols = len(grid[0])  # Number of columns in the grid
+    self.cols = len(grid[0]) if grid else 0  # Number of columns in the grid
     self.result = set()       # Set to store found words
+
+  def setGrid(self,grid):
+    self.grid = grid
+    self.rows = len(grid)
+    self.cols = len(grid[0]) if grid else 0
+
+  def setDictionary(self,dictionary):
+    self.dictionary =set(dictionary)
+
 
   def is_valid(self, x, y, visited):
     # Check if the the cell (x,y) is valid and not yet visited
@@ -23,7 +32,7 @@ class Boggle:
       self.result.add(path)     # Add the word to the result if it's in the dictionary
 
     # Early exit if the path length exceeds the length of the longest word in the dictionary
-    if len(path) > max(map(len, self.dictionary)):
+    if self.dictionary and len(path) > max(map(len, self.dictionary)):
       return
 
     # All 8 possible directions to move in the grid
@@ -44,6 +53,10 @@ class Boggle:
 
 
   def solution(self):
+
+    if not self.dictionary:
+      return []
+      
     # Initialize the visited array to keep track of visited cells
     visited = [[False] * self.cols for _ in range(self.rows)]
 
