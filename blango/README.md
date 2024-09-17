@@ -1,4 +1,13 @@
-To start a Django Project
+# Blango - A Django Web Project
 
-python -m django startproject blango
- 
+## 🚀 Getting Started
+
+### Install Django
+        pip install django
+
+### 🛠️ Starting the Project
+
+        python -m django startproject blango
+
+### Run the server
+        python manage.py runserver
